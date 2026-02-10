@@ -1,5 +1,3 @@
-// ================= DATA =================
-
 let siswa=[
 "Agha Muhammad Azam Ar-Rosyid",
 "Aldiansah Arga Pratama",
@@ -42,33 +40,53 @@ let motivasi=[
 let adminUser="admineleventwolighthouse";
 let adminPass="112rumahbercahaya";
 
+let siswaPass="siswaeleventwolighthouse";
+
+let isAdmin=false;
+
 // ================= LOGIN =================
 
 function login(){
-let u=username.value.toLowerCase();
-let p=password.value.toLowerCase();
 
+let u=username.value.toLowerCase().trim();
+let p=password.value.toLowerCase().trim();
+
+// ADMIN
 if(u===adminUser && p===adminPass){
+isAdmin=true;
+openApp();
+return;
+}
+
+// SISWA (nama lengkap + password sama)
+for(let s of siswa){
+if(s.toLowerCase()===u && p===siswaPass){
+isAdmin=false;
+openApp();
+return;
+}
+
+loginMsg.innerText="Username atau password salah";
+}
+
+function openApp(){
 loginSection.style.display="none";
 appSection.style.display="block";
 initApp();
-}else{
-loginMsg.innerText="Login salah";
-}
 }
 
 function logout(){
-appSection.style.display="none";
-loginSection.style.display="block";
+location.reload();
 }
+
+// ================= INIT =================
 
 function initApp(){
 renderSiswa();
+renderAbsensi();
 renderTugas();
 renderJadwal();
-renderAbsensi();
 motivasiRandom();
-loadKas();
 }
 
 // ================= TAB =================
@@ -103,20 +121,19 @@ li.style.display=li.innerText.toLowerCase().includes(q)?"block":"none";
 function renderAbsensi(){
 absensiList.innerHTML="";
 siswa.forEach(s=>{
-let div=document.createElement("div");
-div.innerHTML=`${s}
-<select onchange="updateAbsensi('${s}',this.value)">
+absensiList.innerHTML+=`${s}
+<select ${!isAdmin?"disabled":""} onchange="updateAbsensi('${s}',this.value)">
 <option></option>
 <option>Hadir</option>
 <option>Izin</option>
 <option>Sakit</option>
 <option>Alpha</option>
-</select>`;
-absensiList.appendChild(div);
+</select><br>`;
 });
 }
 
 function updateAbsensi(s,v){
+if(!isAdmin)return;
 let t=new Date().toISOString().slice(0,10);
 if(!absensi[t])absensi[t]={};
 absensi[t][s]=v;
@@ -128,21 +145,21 @@ localStorage.setItem("absensi",JSON.stringify(absensi));
 function renderTugas(){
 listTugas.innerHTML="";
 tugas.forEach((t,i)=>{
-let li=document.createElement("li");
-li.innerHTML=`${t.nama} (${t.deadline})
-<input type="checkbox" ${t.done?"checked":""} onchange="toggleTugas(${i})">`;
-listTugas.appendChild(li);
+listTugas.innerHTML+=`${t.nama} (${t.deadline})
+<input type="checkbox" ${t.done?"checked":""} onchange="toggleTugas(${i})"><br>`;
 });
 localStorage.setItem("tugas",JSON.stringify(tugas));
 }
 
 function tambahTugas(){
+if(!isAdmin){alert("Hanya admin");return;}
 let n=prompt("Nama tugas");
 let d=prompt("Deadline");
 if(n&&d){tugas.push({nama:n,deadline:d,done:false});renderTugas();}
 }
 
 function toggleTugas(i){
+if(!isAdmin)return;
 tugas[i].done=!tugas[i].done;
 renderTugas();
 }
@@ -153,11 +170,11 @@ function renderJadwal(){
 jadwalList.innerHTML="";
 for(let h in jadwalPelajaran){
 jadwalList.innerHTML+=`
-<div>
+<div class="jadwalItem">
 <b>${h}</b><br>
 Pelajaran: ${jadwalPelajaran[h].join(", ")}<br>
 Piket: ${jadwalPiket[h].join(", ")}
-</div><br>`;
+</div>`;
 }
 }
 
@@ -167,20 +184,17 @@ function motivasiRandom(){
 motivasiText.innerText=motivasi[Math.floor(Math.random()*motivasi.length)];
 }
 
-// ================= KAS =================
-
-function loadKas(){
-kasList.innerHTML="";
-for(let k in kas){
-kasList.innerHTML+=`<li>${k}:${kas[k]}</li>`;
-}
-}
-
-// ================= SEARCH MENU =================
+// ================= SEARCH =================
 
 function searchOption(){
 let q=searchOption.value.toLowerCase();
 document.querySelectorAll(".tabBtn").forEach(b=>{
 b.style.display=b.innerText.toLowerCase().includes(q)?"inline":"none";
 });
+}
+
+// ================= SERVICE WORKER =================
+
+if("serviceWorker"in navigator){
+navigator.serviceWorker.register("service-worker.js");
 }
