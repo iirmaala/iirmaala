@@ -7,38 +7,35 @@
 
 <link rel="stylesheet" href="style.css">
 <link rel="manifest" href="manifest.json">
-
 </head>
+
 <body>
 
-<!-- LOGIN -->
 <section id="loginSection" class="card">
-  <h1>Login ElevenTwo Lighthouse 🌸</h1>
+<h1>Login ElevenTwo Lighthouse 🌸</h1>
 
-  <input id="username" placeholder="Username">
-  <input id="password" type="password" placeholder="Password">
+<input id="username" placeholder="Username">
+<input id="password" type="password" placeholder="Password">
 
-  <button onclick="login()">Login</button>
-  <p id="loginMsg"></p>
+<button onclick="login()">Login</button>
+<p id="loginMsg"></p>
 </section>
 
-<!-- APP -->
 <section id="appSection" style="display:none;">
 
 <header>
-  <h2>ElevenTwo Lighthouse 🌸</h2>
-  <button onclick="logout()">Logout</button>
+<h2>ElevenTwo Lighthouse 🌸</h2>
+<button onclick="logout()">Logout</button>
 </header>
 
 <input id="searchOption" placeholder="Cari menu..." onkeyup="searchOption()">
 
 <nav>
-  <button class="tabBtn active" onclick="showTab('siswa',this)">Siswa</button>
-  <button class="tabBtn" onclick="showTab('absensi',this)">Absensi</button>
-  <button class="tabBtn" onclick="showTab('tugas',this)">Tugas</button>
-  <button class="tabBtn" onclick="showTab('jadwal',this)">Jadwal</button>
-  <button class="tabBtn" onclick="showTab('motivasi',this)">Motivasi</button>
-  <button class="tabBtn" onclick="showTab('kas',this)">Kas</button>
+<button class="tabBtn active" onclick="showTab('siswa',this)">Siswa</button>
+<button class="tabBtn" onclick="showTab('absensi',this)">Absensi</button>
+<button class="tabBtn" onclick="showTab('tugas',this)">Tugas</button>
+<button class="tabBtn" onclick="showTab('jadwal',this)">Jadwal</button>
+<button class="tabBtn" onclick="showTab('motivasi',this)">Motivasi</button>
 </nav>
 
 <div class="tabContent" id="siswa">
@@ -67,11 +64,6 @@
 <h3>Motivasi</h3>
 <p id="motivasiText"></p>
 <button onclick="motivasiRandom()">Ganti</button>
-</div>
-
-<div class="tabContent" id="kas" style="display:none">
-<h3>Kas</h3>
-<ul id="kasList"></ul>
 </div>
 
 </section>
