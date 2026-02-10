@@ -1,0 +1,217 @@
+/* ============ GLOBAL ============ */
+
+*{
+box-sizing:border-box;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+margin:0;
+padding:20px;
+background:#f5f3ff;
+color:#333;
+overflow-x:hidden;
+}
+
+h1,h2,h3{
+color:#7c3aed;
+text-align:center;
+margin-top:0;
+}
+
+/* ============ CARD ============ */
+
+section,.tabContent,.card{
+background:#fff;
+padding:15px 20px;
+margin-bottom:20px;
+border-radius:15px;
+box-shadow:0 8px 20px rgba(0,0,0,0.08);
+transition:.3s;
+}
+
+section:hover,.tabContent:hover{
+transform:translateY(-3px);
+}
+
+/* ============ LOGIN CENTER ============ */
+
+#loginSection{
+max-width:400px;
+margin:60px auto;
+text-align:center;
+}
+
+/* ============ INPUT ============ */
+
+input,select{
+padding:10px;
+margin:6px 0;
+border-radius:12px;
+border:1px solid #ccc;
+width:100%;
+transition:.3s;
+}
+
+input:focus,select:focus{
+border-color:#a855f7;
+outline:none;
+box-shadow:0 0 8px rgba(124,58,237,.3);
+}
+
+/* ============ BUTTON ============ */
+
+button,.btn{
+padding:10px 18px;
+border-radius:12px;
+border:none;
+background:#7c3aed;
+color:white;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover,.btn:hover{
+background:#a855f7;
+transform:scale(1.05);
+}
+
+.btn.small{
+padding:6px 12px;
+font-size:.9rem;
+}
+
+/* ============ HEADER ============ */
+
+.header,header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+gap:10px;
+margin-bottom:15px;
+}
+
+/* ============ TABS ============ */
+
+.tabs,nav{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+margin-bottom:15px;
+gap:5px;
+}
+
+.tabBtn{
+background:#e9d5ff;
+color:#7c3aed;
+padding:10px 15px;
+border-radius:12px;
+transition:.3s;
+}
+
+.tabBtn:hover,.tabBtn.active{
+background:#7c3aed;
+color:#fff;
+transform:translateY(-2px);
+}
+
+/* ============ LIST ============ */
+
+ul{list-style:none;padding:0;}
+
+li{padding:5px 0;}
+
+.tugasItem,.absensiItem{
+padding:10px;
+border-radius:12px;
+background:#f3e8ff;
+margin-bottom:10px;
+transition:.3s;
+}
+
+.tugasItem:hover,.absensiItem:hover{
+background:#e0cfff;
+transform:translateY(-2px);
+}
+
+/* ============ SEARCH ============ */
+
+.search-bar{
+margin:10px auto;
+padding:8px;
+border-radius:10px;
+border:1px solid #ccc;
+width:100%;
+}
+
+/* ============ JADWAL ============ */
+
+.jadwalItem{
+padding:10px;
+margin-bottom:10px;
+border-radius:12px;
+background:#d8b4fe;
+color:white;
+transition:.3s;
+}
+
+.jadwalItem:hover{
+background:#c084fc;
+transform:translateY(-2px);
+}
+
+.jadwalItem button{
+margin-top:5px;
+background:#fff;
+color:#7c3aed;
+}
+
+.jadwalItem button:hover{
+background:#7c3aed;
+color:white;
+}
+
+/* ============ CAMERA ============ */
+
+canvas,video{
+display:block;
+margin:10px auto;
+border-radius:12px;
+border:2px solid #7c3aed;
+}
+
+/* ============ BACKGROUND ============ */
+
+.background-sampul{
+position:fixed;
+inset:0;
+background:url('images/sampul.jpg') center/cover;
+filter:brightness(.5);
+z-index:-1;
+}
+
+/* ============ ANIMATION ============ */
+
+.fade-in{
+animation:fadeIn .6s ease;
+}
+
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+/* ============ MOBILE ============ */
+
+@media(max-width:480px){
+
+header{
+flex-direction:column;
+}
+
+.tabBtn{
+width:100%;
+}
+
+}
